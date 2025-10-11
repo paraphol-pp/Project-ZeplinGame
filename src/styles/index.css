@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@import "tailwindcss";
+
+@theme {
+
+  /* font */
+  --font-primary: "Rajdhani", sans-serif;
+  --font-secondary: "Rubik", sans-serif;
+
+  /* container */
+  
+  /* --container-padding: 1rem; */
+
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-2xl: 1300px;
+
+  /* color */
+  --color-secondary: #060606;
+}
+
+
+
+body{
+  @apply font-secondary bg-secondary text-white scroll-smooth;
+}
+
+h1,h2,h3,h4,h5,h6{
+  @apply font-primary
+}
+.h1,.h2,.h3,.h4,.h5,.h6{
+  @apply font-primary
+}
+
+/* .container {
+  padding-inline: var(--container-padding);
+} */
