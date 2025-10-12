@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import type { RootState } from "../store/store";
-import type { Game } from "../store/gamesSlice";
+// import type { Game } from "../store/gamesSlice";
 import { Link } from "react-router-dom";
 import Container from "../components/Container";
 
