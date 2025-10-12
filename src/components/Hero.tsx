@@ -5,7 +5,7 @@ const Hero = () => {
 
       <video
         className="absolute top-0 left-0 w-full h-screen object-cover"
-        src="/assets/hero.mp4"
+        src="/assets/short.mp4"
         autoPlay
         loop
         muted
