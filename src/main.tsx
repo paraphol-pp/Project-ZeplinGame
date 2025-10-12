@@ -8,9 +8,11 @@ import { Provider } from "react-redux";
 //Component
 import App from "./App";
 import Home from "./routes/Home";
-import GameDetail from "./routes/GameDetail";
+import GameDetail from "./components/GameDetail";
 import Favorites from "./routes/Favorites";
 import About from "./routes/About";
+import Blog from "./components/Blog";
+import Contact from "./components/Contact";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +30,12 @@ const router = createBrowserRouter([
       },
       { path: "about",
         element: <About />
+      },
+      { path: "blog",
+        element: <Blog />
+      },
+      { path: "contact",
+        element: <Contact />
       },
     ],
   },

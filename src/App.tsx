@@ -1,24 +1,31 @@
-import { Outlet } from "react-router-dom";
-
+import { Outlet, useLocation  } from "react-router-dom";
+import { useEffect } from "react";
 //component
 import Navbar from "./components/Navbar";
+import Container from "./components/Container";
+import Hero from "./components/Hero";
 
 export default function App() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    // scroll ขึ้นบนสุดทุกครั้งที่เปลี่ยนหน้า
+    window.scrollTo(0, 0);
+  }, [pathname]);
   return (
-    // theme cupcake DaisyUI
-    <div data-theme="cupcake" className="min-h-screen bg-base-200">
+    <>
       <Navbar />
-
-      <main className="container mx-auto px-4 py-8">
-        <Outlet />
-      </main>
-
-      <footer className="footer footer-center p-6 bg-base-100 text-base-content mt-10">
+      {location.pathname === "/" && <Hero/>}
+      <div className="py-15">
+        <Container>
+          <Outlet />
+        </Container>
+      </div>
+      {/* <footer className="footer footer-center p-6 bg-base-100 text-base-content mt-10">
         <aside>
           <p>© {new Date().getFullYear()} MovieNow — Teaching</p>
         </aside>
-      </footer>
-      
-    </div>
+      </footer> */}
+    </>
   );
 }

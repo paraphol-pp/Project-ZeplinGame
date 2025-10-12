@@ -1,16 +1,19 @@
+/* fonts */
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+/* tailwind */
 @import "tailwindcss";
+/* swiper */
+@import "swiper/css";
+@import "swiper/css/navigation";
+
 
 @theme {
 
   /* font */
   --font-primary: "Rajdhani", sans-serif;
   --font-secondary: "Rubik", sans-serif;
-
-  /* container */
   
   /* --container-padding: 1rem; */
-
   --breakpoint-sm: 640px;
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px;
@@ -20,8 +23,6 @@
   /* color */
   --color-secondary: #060606;
 }
-
-
 
 body{
   @apply font-secondary bg-secondary text-white scroll-smooth;
@@ -34,6 +35,12 @@ h1,h2,h3,h4,h5,h6{
   @apply font-primary
 }
 
-/* .container {
-  padding-inline: var(--container-padding);
-} */
+.swiper-button-prev,
+.swiper-button-next {
+  @apply text-white/50 transition-all duration-300 w-[60px] h-[70px] p-2 top-[50%] transform translate-y-[-50%] bg-black/50 z-10
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  @apply text-white bg-black/50
+}
