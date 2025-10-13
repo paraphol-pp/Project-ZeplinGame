@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 
+// components
+import GlowWrapper from "./GlowWrapper";
+
 type GameCardProps = {
   id: number;
   name: string;
@@ -16,9 +19,11 @@ const GameCard = ({
   released,
 }: GameCardProps) => {
   return (
+    <GlowWrapper>
+
     <Link
       to={`/game/${id}`}
-      className="group relative block rounded-xl overflow-hidden bg-neutral-900 transition-all duration-300 hover:scale-105 hover:z-10 hover:shadow-[0_10px_30px_rgba(0,0,0,0.6)]"
+      className="group relative block rounded-xl overflow-hidden bg-neutral-950 transition-all duration-300 hover:scale-105 hover:z-10 "
     >
       {/* Image */}
       <div className="overflow-hidden rounded-t-xl">
@@ -29,8 +34,8 @@ const GameCard = ({
         />
       </div>
 
-      {/* Overlay (แสดงตอน hover เหมือน Netflix) */}
-      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-center rounded-xl">
+      {/* Overlay hover */}
+      <div className="absolute inset-0 bg-neutral-950/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-center rounded-xl">
         <div className="absolute top-20">
           <p className="text-white font-semibold text-sm mb-2">{name}</p>
           <button className="bg-indigo-600 text-white text-xs px-4 py-2 rounded-full cursor-pointer">
@@ -46,6 +51,7 @@ const GameCard = ({
         <p className="text-gray-400/50 text-xs">{released}</p>
       </div>
     </Link>
+    </GlowWrapper>
   );
 };
 

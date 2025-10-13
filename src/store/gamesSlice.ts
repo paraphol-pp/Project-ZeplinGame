@@ -44,6 +44,19 @@ export const fetchGames = createAsyncThunk<
   return res.data;
 });
 
+// seatch
+export const searchGames = createAsyncThunk<
+  GamesResponse,
+  string
+>("games/searchGames", async (query) => {
+  const url = `https://api.rawg.io/api/games?key=${API_KEY}&search=${encodeURIComponent(
+    query
+  )}`;
+  const res = await axios.get<GamesResponse>(url, { timeout: 15000 });
+  return res.data;
+});
+
+
 const gamesSlice = createSlice({
   name: "games",
   initialState,
@@ -53,20 +66,35 @@ const gamesSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder
-      .addCase(fetchGames.pending, (state) => {
-        state.status = "loading";
-        state.error = undefined;
-      })
-      .addCase(fetchGames.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.items = action.payload.results;
-      })
-      .addCase(fetchGames.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.error.message || "Failed to fetch games.";
-      });
-  },
+  builder
+    .addCase(fetchGames.pending, (state) => {
+      state.status = "loading";
+      state.error = undefined;
+    })
+    .addCase(fetchGames.fulfilled, (state, action) => {
+      state.status = "succeeded";
+      state.items = action.payload.results;
+    })
+    .addCase(fetchGames.rejected, (state, action) => {
+      state.status = "failed";
+      state.error = action.error.message || "Failed to fetch games.";
+    })
+
+    // ✅ เพิ่มส่วนนี้
+    .addCase(searchGames.pending, (state) => {
+      state.status = "loading";
+      state.error = undefined;
+    })
+    .addCase(searchGames.fulfilled, (state, action) => {
+      state.status = "succeeded";
+      state.items = action.payload.results;
+    })
+    .addCase(searchGames.rejected, (state, action) => {
+      state.status = "failed";
+      state.error = action.error.message || "Failed to search games.";
+    });
+}
+,
 });
 
 export const { setPage } = gamesSlice.actions;

@@ -38,6 +38,7 @@ const Favorites = () => {
             <p className="text-gray-400 text-xs">{game.released}</p>
           </div>
         </Link>
+        
       ))}
     </div>
   );

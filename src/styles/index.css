@@ -44,3 +44,11 @@ h1,h2,h3,h4,h5,h6{
 .swiper-button-next:hover {
   @apply text-white bg-black/50
 }
+::selection {
+  @apply bg-indigo-900 text-white;
+}
+::-moz-selection {
+  @apply bg-indigo-900 text-white;
+}
+
+
