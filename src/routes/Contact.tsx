@@ -63,16 +63,16 @@ const Contact = () => {
 
   return (
     <Container>
-      <div className="my-30 max-w-[1500px] mx-auto">
+      <div className="my-10 md:my-30 max-w-[1500px] mx-auto">
         <GlowWrapper>
-          <div className="grid grid-cols-2 bg-neutral-950 rounded-3xl h-full p-10 gap-10">
+          <div className="grid md:grid-cols-2 bg-neutral-950 rounded-3xl h-full p-2 md:p-10 gap-10">
             {/* ด้านซ้าย */}
             <div className="flex flex-col justify-center h-full">
               <h1 className="text-5xl font-bold capitalize">
-                Get ready to <br /> create great
+                Get ready to <br className="hidden md:block" /> create great
               </h1>
 
-              <div className="grid grid-cols-2">
+              <div className="grid md:grid-cols-2">
                 <div className="grid grid-rows-3 space-y-5 mt-5">
                   {textContact.slice(0,3).map((item) => (
                     <div key={item.id} className="flex items-center space-x-4">
@@ -111,7 +111,7 @@ const Contact = () => {
 
               <form className="space-y-6" onSubmit={handleSubmit}>
                 {/* Row 1 */}
-                <div className="grid grid-cols-2 gap-8">
+                <div className="grid md:grid-cols-2 gap-8">
                   <input
                     type="text"
                     placeholder="Your Name"
@@ -125,7 +125,7 @@ const Contact = () => {
                 </div>
 
                 {/* Row 2 */}
-                <div className="grid grid-cols-2 gap-8">
+                <div className="grid md:grid-cols-2 gap-8">
                   <input
                     type="email"
                     placeholder="Your Email"

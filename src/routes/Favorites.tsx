@@ -25,7 +25,7 @@ const Favorites = () => {
         <Link
           key={game.id}
           to={`/game/${game.id}`}
-          className="bg-neutral-800 rounded-xl overflow-hidden hover:scale-105 transition-transform"
+          className="bg-neutral-950 rounded-xl overflow-hidden hover:scale-105 transition-transform"
         >
           <img
             src={game.background_image}
@@ -35,7 +35,7 @@ const Favorites = () => {
           <div className="p-3">
             <h3 className="font-semibold truncate">{game.name}</h3>
             <p className="text-yellow-400 text-sm">⭐ {game.rating.toFixed(2)}</p>
-            <p className="text-gray-400 text-xs">{game.released}</p>
+            <p className="text-white/50 text-xs">{game.released}</p>
           </div>
         </Link>
         

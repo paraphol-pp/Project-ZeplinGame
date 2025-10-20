@@ -38,16 +38,16 @@ const Blog = () => {
       initial={{ opacity: 0, y: 600 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      viewport={{ once: true }}
+      viewport={{ once: true, margin: "-50px" }}
     >
       <Container>
-        <div className="max-w-[1440px] mx-auto">
+        <div className="max-w-[1440px] mx-5 md:mx-auto">
           {/* header */}
           <div className="space-y-5  mt-20 mb-20">
             <p className="text-xl font-semibold text-indigo-600 uppercase">
               Latest Blog
             </p>
-            <h1 className="text-5xl font-bold">
+            <h1 className="text-4xl md:text-5xl font-bold">
               Transforming Ideas into
               <br />
               Game-Ready Designs
@@ -55,7 +55,7 @@ const Blog = () => {
           </div>
 
           {/* content */}
-          <div className="grid grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-8">
             {details.map((item) => (
               <GlowWrapper key={item.id} type="card" noPadding>
                 <div className="bg-neutral-950 rounded-2xl overflow-hidden group cursor-pointer transition duration-500">

@@ -42,7 +42,7 @@ const Home = () => {
   return (
     <div className="relative">
 
-      <div className="-mt-[250px] relative z-20">
+      <div className="-mt-[450px] md:-mt-[250px] relative z-20">
         <Container>
           <CategoryRow title="Top Games" games={topGames} />
         </Container>

@@ -21,11 +21,7 @@ export default function App() {
           <Outlet />
         </Container>
       </div>
-      {/* <footer className="footer footer-center p-6 bg-base-100 text-base-content mt-10">
-        <aside>
-          <p>© {new Date().getFullYear()} MovieNow — Teaching</p>
-        </aside>
-      </footer> */}
+
     </>
   );
 }

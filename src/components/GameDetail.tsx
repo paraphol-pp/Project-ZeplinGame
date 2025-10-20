@@ -84,11 +84,11 @@ const GameDetail = () => {
           className="w-full rounded-xl shadow-lg mb-6"
         />
 
-        <div className="flex items-center justify-between mb-3">
+        <div className="md:flex items-center justify-between mb-3">
           <h1 className="text-4xl font-bold">{game.name}</h1>
           <button
             onClick={handleFavorite}
-            className={`px-5 py-2 rounded-lg font-semibold transition cursor-pointer
+            className={`w-full my-5 md:my-0 md:px-5 py-2 md:w-fit rounded-lg font-semibold transition cursor-pointer
             ${
               isFavorite
                 ? "bg-red-500 hover:bg-red-600"

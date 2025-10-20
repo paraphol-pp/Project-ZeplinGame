@@ -1,50 +1,47 @@
-// import { useEffect } from "react";
-// import { useSelector, useDispatch } from "react-redux";
-// import { fetchGames } from "../store/gamesSlice";
-// import GameCard from "./GameCard";
-// import type { RootState } from "../store/store";
-
-// const GameList = () => {
-//   const dispatch = useDispatch();
-//   const { items, status } = useSelector((state: RootState) => state.games);
-
-//   useEffect(() => {
-//     dispatch(fetchGames({ page: 1, limit: 40 }) as any);
-//   }, [dispatch]);
-
-//   if (status === "loading") return <p>Loading games...</p>;
-//   if (status === "failed") return <p>Failed to load games.</p>;
-
-//   return (
-//     <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-//       {items.map((game) => (
-//         <GameCard
-//           key={game.id}
-//           id={game.id}
-//           name={game.name}
-//           background_image={game.background_image}
-//           rating={game.rating}
-//           released={game.released}
-//         />
-//       ))}
-//     </div>
-//   );
-// };
-
-// export default GameList;
-import { useSelector } from "react-redux";
-import type { RootState } from "../store/store";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import type { RootState, AppDispatch } from "../store/store";
+import { fetchGames } from "../store/gamesSlice";
 import GameCard from "../components/GameCard";
 
 const GameList = () => {
+  const dispatch = useDispatch<AppDispatch>();
   const { items, status } = useSelector((state: RootState) => state.games);
 
-  if (status === "loading") return <p className="text-center">Loading games...</p>;
-  if (status === "failed") return <p className="text-center text-red-400">Failed to load games.</p>;
+  useEffect(() => {
+    if (items.length === 0 && status === "idle") {
+      dispatch(fetchGames({}));
+    }
+  }, [dispatch, items.length, status]);
+
+  // loading
+  if (status === "loading") {
+    return (
+      <div className="flex justify-center items-center h-[60vh]">
+        <p className="text-center text-purple-400 animate-pulse">
+          🎮 Loading games...
+        </p>
+      </div>
+    );
+  }
+
+  // failed
+  if (status === "failed") {
+    return (
+      <div className="flex flex-col justify-center items-center h-[60vh] text-center text-red-400">
+        ❌ Failed to load games. Please try again.
+        <button
+          onClick={() => dispatch(fetchGames({}))}
+          className="mt-3 px-4 py-2 bg-purple-600 rounded-xl hover:bg-purple-700 transition"
+        >
+          Retry
+        </button>
+      </div>
+    );
+  }
 
   return (
-    
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 p-10">
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-6 p-10">
       {items.map((game) => (
         <GameCard key={game.id} {...game} />
       ))}

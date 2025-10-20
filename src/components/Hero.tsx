@@ -13,7 +13,7 @@ const Hero = () => {
       />
 
       <div className="absolute top-0 left-0 w-full h-[20%] bg-gradient-to-b from-black via-black/10 to-transparent" />
-      <div className="absolute bottom-0 left-0 w-full h-[50%] bg-gradient-to-t from-black via-black/10 to-transparent" />
+      <div className="absolute bottom-0 left-0 w-full h-[70%] md:h-[50%] bg-gradient-to-t from-black via-black/10 to-transparent" />
 
 
 
