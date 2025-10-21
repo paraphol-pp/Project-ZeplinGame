@@ -2,6 +2,7 @@
 import { GoLock } from "react-icons/go";
 import { FaCode } from "react-icons/fa";
 import CountUp from "react-countup";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 // components
@@ -9,6 +10,9 @@ import Container from "../components/Container";
 import GlowWrapper from "../components/GlowWrapper";
 
 const About = () => {
+
+  const navigate = useNavigate();
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 600 }}
@@ -105,7 +109,8 @@ const About = () => {
                 </GlowWrapper>
 
                 <div className="bg-indigo-600 px-3 py-4 rounded-full text-center">
-                  <button className="h1 text-xl text-white font-semibold cursor-pointer">
+                  <button onClick={() => navigate("/contact")} 
+                  className="h1 text-xl text-white font-semibold cursor-pointer">
                     Read More About Me →
                   </button>
                 </div>
