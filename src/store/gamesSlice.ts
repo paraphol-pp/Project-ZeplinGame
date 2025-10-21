@@ -34,22 +34,36 @@ const initialState: GamesState = {
 
 const API_KEY = import.meta.env.VITE_RAWG_API_KEY;
 
-
-
 export const fetchGames = createAsyncThunk<
   GamesResponse,
-  { page?: number; limit?: number }
->("games/fetchGames", async ({ page = 1, limit = 40 }) => {
-  const url = `https://api.rawg.io/api/games?key=${import.meta.env.VITE_RAWG_API_KEY}&page=${page}&page_size=${limit}`;
+  { page?: number; limit?: number },
+  { state: { games: GamesState } }
+>("games/fetchGames", async ({ page = 1, limit = 40 }, { getState }) => {
+  const state = getState();
+
+  if (state.games.items.length > 0) {
+    console.log("⚡ Using cached data from Redux state");
+    return { count: state.games.items.length, results: state.games.items };
+  }
+
+  const cached = localStorage.getItem("games");
+  if (cached) {
+    console.log("💾 Loaded from localStorage cache");
+    const data = JSON.parse(cached);
+    return { count: data.length, results: data };
+  }
+
+  const url = `https://api.rawg.io/api/games?key=${API_KEY}&page=${page}&page_size=${limit}`;
 
   for (let i = 0; i < 3; i++) {
     try {
       const res = await axios.get<GamesResponse>(url);
-      // check fetch
-      console.log(`✅ fetch success (try #${i + 1})`); 
+      console.log(`✅ Fetch success (try #${i + 1})`);
+      // localStorage
+      localStorage.setItem("games", JSON.stringify(res.data.results));
       return res.data;
     } catch (err: any) {
-      console.warn(`⚠️ fetch failed (try #${i + 1}) →`, err.message);
+      console.warn(`⚠️ Fetch failed (try #${i + 1}) →`, err.message);
       if (i === 2) throw err;
       await new Promise((r) => setTimeout(r, 2000));
     }
@@ -58,18 +72,16 @@ export const fetchGames = createAsyncThunk<
   throw new Error("Failed after 3 retries.");
 });
 
-
-export const searchGames = createAsyncThunk<
-  GamesResponse,
-  string
->("games/searchGames", async (query) => {
-  const url = `https://api.rawg.io/api/games?key=${API_KEY}&search=${encodeURIComponent(
-    query
-  )}`;
-  const res = await axios.get<GamesResponse>(url);
-  return res.data;
-});
-
+export const searchGames = createAsyncThunk<GamesResponse, string>(
+  "games/searchGames",
+  async (query) => {
+    const url = `https://api.rawg.io/api/games?key=${API_KEY}&search=${encodeURIComponent(
+      query
+    )}`;
+    const res = await axios.get<GamesResponse>(url);
+    return res.data;
+  }
+);
 
 const gamesSlice = createSlice({
   name: "games",
@@ -77,6 +89,11 @@ const gamesSlice = createSlice({
   reducers: {
     setPage: (state, action: PayloadAction<number>) => {
       state.page = action.payload;
+    },
+    clearCache: (state) => {
+      state.items = [];
+      localStorage.removeItem("games");
+      console.log("🧹 Cleared cache");
     },
   },
   extraReducers: (builder) => {

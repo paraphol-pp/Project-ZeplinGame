@@ -9,7 +9,6 @@ export default function App() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    // scroll ขึ้นบนสุดทุกครั้งที่เปลี่ยนหน้า
     window.scrollTo(0, 0);
   }, [pathname]);
   return (

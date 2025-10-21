@@ -9,30 +9,40 @@ const GameList = () => {
   const { items, status } = useSelector((state: RootState) => state.games);
 
   useEffect(() => {
-    if (items.length === 0 && status === "idle") {
-      dispatch(fetchGames({}));
-    }
-  }, [dispatch, items.length, status]);
+    // ถ้าไม่มี localStorage fetch ใหม่
+    const cached = localStorage.getItem("games");
 
-  // loading
+    if (items.length === 0 && !cached) {
+      console.log("📡 No cache found → fetching from API");
+      dispatch(fetchGames({}));
+    } else if (cached && items.length === 0) {
+      console.log("💾 Loaded from localStorage → set to Redux");
+      dispatch({
+        type: "games/fetchGames/fulfilled",
+        payload: { count: JSON.parse(cached).length, results: JSON.parse(cached) },
+      });
+    }
+  }, [dispatch, items.length]);
+
+  // Load
   if (status === "loading") {
     return (
       <div className="flex justify-center items-center h-[60vh]">
-        <p className="text-center text-purple-400 animate-pulse">
+        <p className="text-center text-indigo-400 animate-pulse text-xl font-semibold">
           🎮 Loading games...
         </p>
       </div>
     );
   }
 
-  // failed
+  // Fail
   if (status === "failed") {
     return (
       <div className="flex flex-col justify-center items-center h-[60vh] text-center text-red-400">
-        ❌ Failed to load games. Please try again.
+        Failed to load games. Please try again.
         <button
           onClick={() => dispatch(fetchGames({}))}
-          className="mt-3 px-4 py-2 bg-purple-600 rounded-xl hover:bg-purple-700 transition"
+          className="mt-3 px-4 py-2 bg-indigo-600 rounded-xl hover:bg-indigo-700 transition"
         >
           Retry
         </button>
