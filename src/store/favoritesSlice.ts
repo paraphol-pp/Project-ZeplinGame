@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit"; // ✅ แก้ตรงนี้
+import type { PayloadAction } from "@reduxjs/toolkit";
 import type { Game } from "./gamesSlice";
 
 type FavoritesState = {
