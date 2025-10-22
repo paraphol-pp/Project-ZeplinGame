@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addFavorite, removeFavorite } from "../store/favoritesSlice";
 import type { RootState } from "../store/store";
 import Container from "./Container";
+import { useNavigate } from "react-router-dom";
 
 const API_KEY = import.meta.env.VITE_RAWG_API_KEY;
 
@@ -25,6 +26,7 @@ const GameDetail = () => {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const favorites = useSelector((state: RootState) => state.favorites.items);
+  const navigate = useNavigate();
 
   const isFavorite = favorites.some((fav) => fav.id === Number(id));
 
@@ -76,7 +78,18 @@ const GameDetail = () => {
   }
 
   return (
-    <Container>
+    <div className="py-8">
+      {/* Back button */}
+      <div className="mb-6">
+        <button
+          type="button"
+          onClick={() => navigate(-1)}
+          className="inline-flex items-center gap-2 px-3 py-2 text-sm text-indigo-600 hover:text-indigo-200 transition-all duration-300 cursor-pointer"
+        >
+          ← Back
+        </button>
+      </div>
+
       <div className="max-w-5xl mx-auto p-6 text-white pt-20">
         <img
           src={game.background_image}
@@ -119,7 +132,7 @@ const GameDetail = () => {
           {game.description_raw}
         </p>
       </div>
-    </Container>
+    </div>
   );
 };
 

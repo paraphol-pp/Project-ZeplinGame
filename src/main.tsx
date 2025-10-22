@@ -10,7 +10,7 @@ import App from "./App";
 import Home from "./routes/Home";
 import GameDetail from "./components/GameDetail";
 import Favorites from "./routes/Favorites";
-
+import ViewGames from "./components/ViewGames";
 import About from "./routes/About";
 import Blog from "./routes/Blog";
 import Contact from "./routes/Contact";
@@ -20,24 +20,13 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     children: [
-      { index: true,
-        element: <Home /> 
-      },
-      { path: "game/:id",
-        element: <GameDetail />
-      },
-      { path: "favorites",
-        element: <Favorites />
-      },
-      { path: "about",
-        element: <About />
-      },
-      { path: "blog",
-        element: <Blog />
-      },
-      { path: "contact",
-        element: <Contact />
-      },
+      { index: true, element: <Home /> },
+      { path: "game/:id", element: <GameDetail /> },
+      { path: "favorites", element: <Favorites /> },
+      { path: "about", element: <About /> },
+      { path: "blog", element: <Blog /> },
+      { path: "contact", element: <Contact /> },
+      { path: "games", element: <ViewGames /> },
     ],
   },
 ]);

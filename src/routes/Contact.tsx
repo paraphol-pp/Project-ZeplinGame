@@ -44,7 +44,7 @@ const Contact = () => {
     {
       id: 4,
       title: "E-mail:",
-      name: "danupol.wung@bumail.net",
+      name: "danupol.wang@bumail.net",
       icon: <MdEmail />,
     },
     {

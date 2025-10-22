@@ -25,7 +25,6 @@ const GameCard = ({
       to={`/game/${id}`}
       className="group relative block rounded-xl overflow-hidden bg-neutral-950 transition-all duration-300 hover:scale-105 hover:z-10 "
     >
-      {/* Image */}
       <div className="overflow-hidden rounded-t-xl">
         <img
           src={background_image}
@@ -34,7 +33,6 @@ const GameCard = ({
         />
       </div>
 
-      {/* Overlay hover */}
       <div className="absolute inset-0 bg-neutral-950/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-center rounded-xl">
         <div className="absolute top-20">
           <p className="text-white font-semibold text-sm mb-2">{name}</p>
@@ -44,7 +42,6 @@ const GameCard = ({
         </div>
       </div>
 
-      {/* Game Info */}
       <div className="p-3 rounded-b-xl">
         <h3 className="font-semibold truncate text-white text-lg">{name}</h3>
         <p className="text-yellow-400 text-sm">⭐ {rating.toFixed(2)}</p>

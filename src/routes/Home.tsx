@@ -1,17 +1,17 @@
 // Home.tsx
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchGames } from "../store/gamesSlice";
-import type { RootState } from "../store/store";
+import { useAppDispatch, useAppSelector } from "../store/hook";
+import { fetchGames } from "../store/gamesSlice"; 
+import SectionHeader from "../components/SectionHeader";
 import CategoryRow from "../components/CategoryRow";
 import Container from "../components/Container";
 
 const Home = () => {
-  const dispatch = useDispatch();
-  const { items, status } = useSelector((state: RootState) => state.games);
+  const dispatch = useAppDispatch();
+  const { items, status } = useAppSelector((state) => state.games);
 
   useEffect(() => {
-    dispatch(fetchGames({ page: 1, limit: 100 }) as any);
+    dispatch(fetchGames({ page: 1, limit: 100 }));
   }, [dispatch]);
 
   if (status === "loading") {
@@ -35,23 +35,42 @@ const Home = () => {
     );
   }
 
-  const topGames = items.slice(0, 100);
-  const topRating = items.filter((g) => g.rating > 4.5).slice(0, 100);
-  const trending = items.slice(10, 100);
+  const topGames = items.slice(0, 10);       // ตัวอย่างจำกัดแสดง 10 ชิ้น
+  const topRating = items.filter((g) => g.rating > 4.5).slice(0, 10);
+  const trending = items.slice(10, 20);
 
   return (
     <div className="relative">
 
+      {/* Top Games (header + carousel) */}
       <div className="-mt-[450px] md:-mt-[250px] relative z-20">
         <Container>
-          <CategoryRow title="Top Games" games={topGames} />
+          {/* Top Games — มีปุ่ม View Top Games */}
+          <SectionHeader
+            title="Top Games"
+            to="/games?filter=top"
+            buttonLabel="View Top Games →"
+          />
+          <CategoryRow games={topGames} />
         </Container>
       </div>
 
-
       <Container>
-        <CategoryRow title="Top Rating" games={topRating} />
-        <CategoryRow title="New & Trending" games={trending} />
+        {/* Top Rating */}
+        <SectionHeader
+          title="Top Rating"
+          to="/games?filter=rating"
+          buttonLabel="View Top Rating →"
+        />
+        <CategoryRow games={topRating} />
+
+        {/* New & Trending */}
+        <SectionHeader
+          title="New & Trending"
+          to="/games?filter=new"
+          buttonLabel="View New & Trending →"
+        />
+        <CategoryRow games={trending} />
       </Container>
     </div>
   );

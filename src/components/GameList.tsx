@@ -9,7 +9,6 @@ const GameList = () => {
   const { items, status } = useSelector((state: RootState) => state.games);
 
   useEffect(() => {
-    // ถ้าไม่มี localStorage fetch ใหม่
     const cached = localStorage.getItem("games");
 
     if (items.length === 0 && !cached) {
